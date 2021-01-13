@@ -1,0 +1,17 @@
+=> Pour son installation et sa mise à jour Laravel utilise le gestionnaire de dépendances "composer".
+=> La création d’une application Laravel se fait à partir de la console avec une simple ligne de commande.
+=> Laravel est organisé en plusieurs dossiers.
+=> Le dossier public est le seul qui doit être accessible pour le client.
+=> L’environnement est fixé à l’aide du fichier .env.
+=> Par défaut Laravel est en mode « debug » avec affichage de toutes les erreurs.
+
+
+* ./storage/ *
+Fichier laravel.log garde les infos des erreurs, utile pour débuguer
+On peut changer son comportement dans ./.env
+
+
+
+
+NE PAS OUBLIER DE FAIRE :
+-> Le référencement du site (robots.txt)
