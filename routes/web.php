@@ -1,22 +1,21 @@
 <?php
 
-/* Ce fichier regroupe l'ensemble des routes permettant d'accéder aux différentes pages du site. */
+	/* Ce fichier regroupe l'ensemble des routes permettant d'accéder aux différentes pages du site. */
 
-use Illuminate\Support\Facades\Route;
+	use Illuminate\Support\Facades\Route;
 
-/* Route vers la page d'accueil */
-Route::get('/', function () {
-    return view("accueil");
-});
+	/* On utilise des contrôleurs pour l'affichage des pages web */
+	use App\Http\Controllers\ControleurAccueil;
+	use App\Http\Controllers\ControleurLogiciels;
+	use App\Http\Controllers\ControleurSalles;
 
-/* Route vers la page des logiciels */
-Route::get('logiciels', function () {
-    return view("logiciels");
-});
+	/* Route vers le contrôleur de la page d'accueil */
+	Route::get('/', [ControleurAccueil::class, 'index']);
 
-/* Route vers la page des salles */
-Route::get('salles', function () {
-    return view("salles");
-});
+	/* Route vers le contrôleur de la page des logiciels */
+	Route::get('logiciels', [ControleurLogiciels::class, 'index']);
+
+	/* Route vers le contrôleur de la page des salles */
+	Route::get('salles', [ControleurSalles::class, 'index']);
 
 ?>
