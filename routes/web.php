@@ -10,12 +10,14 @@
 	use App\Http\Controllers\ControleurSalles;
 
 	/* Route vers le contrôleur de la page d'accueil */
-	Route::get('/', [ControleurAccueil::class, 'index']);
+	Route::get("/", [ControleurAccueil::class, "afficherPage"]);
 
 	/* Route vers le contrôleur de la page des logiciels */
-	Route::get('logiciels', [ControleurLogiciels::class, 'index']);
+	Route::get("logiciels", [ControleurLogiciels::class, "afficherPage"]);
+	Route::post("logiciels", [ControleurLogiciels::class, "stockerInfos"]);
 
 	/* Route vers le contrôleur de la page des salles */
-	Route::get('salles', [ControleurSalles::class, 'index']);
+	Route::get("salles", [ControleurSalles::class, "afficherPage"]);
+	Route::post("salles", [ControleurSalles::class, "stockerInfos"]);
 
 ?>

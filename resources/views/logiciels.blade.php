@@ -14,3 +14,7 @@
 @section("objet")
 	d'un logiciel
 @endsection
+
+@section("objet_bis")
+	"logiciel"
+@endsection

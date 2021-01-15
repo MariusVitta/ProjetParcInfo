@@ -8,8 +8,9 @@
 
 	class ControleurAccueil extends Controller {
 
-	    public function index() {
-	        return view('accueil');
+		/* Affichage de la page */
+	    public function afficherPage() {
+	        return view("accueil");
 	    }
 	}
 

@@ -14,3 +14,7 @@
 @section("objet")
 	d'une salle
 @endsection
+
+@section("objet_bis")
+	"salle"
+@endsection
