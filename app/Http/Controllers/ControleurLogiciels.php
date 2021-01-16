@@ -4,7 +4,7 @@
 
 	namespace App\Http\Controllers;
 
-	use Illuminate\Http\Request;
+	use App\Http\Requests\RequeteLogiciel;
 
 	class ControleurLogiciels extends Controller {
 
@@ -16,7 +16,7 @@
  		/* Récupération des informations provenant de la barre de recherche de logiciels
  		 * Paramètre : résultat de la saisie
  		 */
-    	public function stockerInfos(Request $requete) {
+    	public function stockerInfos(RequeteLogiciel $requete) {
         	return view("logiciels")->with("reponse", "Le logiciel recherché est " . $requete->input("logiciel"));
     	}
 	}

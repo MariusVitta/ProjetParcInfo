@@ -17,9 +17,10 @@
 		<!-- Barre de recherche permettant d'entrer le nom d'un logiciel ou d'une salle (pour l'instant un formulaire de saisie) -->
 		<form method="POST">
 			@csrf <!-- Code permettant d'éviter les attaques CSRF -->
-			<label for="nom"> Entrez le nom @yield("objet") : </label>
-			<input type="text" name=@yield("objet_bis") id=@yield("objet_bis") />
-			<input type="submit" value="Rechercher" />
+			<div>
+				@yield("champ_de_saisie")
+				<input type="submit" value="Rechercher" />
+			</div>
 		</form>
 
 		<!-- Affichage de la saisie de l'utilisateur (uniquement après une saisie) -->

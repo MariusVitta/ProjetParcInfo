@@ -11,10 +11,10 @@
 	Salles
 @endsection
 
-@section("objet")
-	d'une salle
-@endsection
-
-@section("objet_bis")
-	"salle"
+@section("champ_de_saisie")
+	<label for="salle"> Entrez le nom d'une salle : </label>
+	<input type="text" name="salle" id="salle" />
+	@error("salle") <!-- Gestion des erreurs (le message est généré automatiquement) -->
+		<div> {{ $message }} </div>
+	@enderror
 @endsection

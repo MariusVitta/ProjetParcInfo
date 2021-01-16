@@ -11,10 +11,10 @@
 	Logiciels
 @endsection
 
-@section("objet")
-	d'un logiciel
-@endsection
-
-@section("objet_bis")
-	"logiciel"
+@section("champ_de_saisie")
+	<label for="logiciel"> Entrez le nom d'un logiciel : </label>
+	<input type="text" name="logiciel" id="logiciel" />
+	@error("logiciel") <!-- Gestion des erreurs (le message est généré automatiquement) -->
+		<div> {{ $message }} </div>
+	@enderror
 @endsection

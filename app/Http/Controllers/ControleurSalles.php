@@ -4,7 +4,7 @@
 
 	namespace App\Http\Controllers;
 
-	use Illuminate\Http\Request;
+	use App\Http\Requests\RequeteSalle;
 
 	class ControleurSalles extends Controller {
 
@@ -16,7 +16,7 @@
 	    /* Récupération des informations provenant de la barre de recherche de salles
  		 * Paramètre : résultat de la saisie
  		 */
-	    public function stockerInfos(Request $requete) {
+	    public function stockerInfos(RequeteSalle $requete) {
         	return view("salles")->with("reponse", "La salle recherchée est " . $requete->input("salle"));
     	}
 	}

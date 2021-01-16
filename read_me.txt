@@ -28,3 +28,9 @@ Chemin d'accès : app/Http/Controllers/ControleurAccueil.php
 				 app/Http/Controllers/ControleurLogiciels.php
 				 app/Http/Controllers/ControleurSalles.php
 Description : ces fichiers représentent les contrôleurs qui vont recevoir les requêtes et renvoyer la page appropriée.
+
+3) Fichiers de requête
+
+Chemin d'accès : app/Http/Requests/RequeteLogiciel.php
+				 app/Http/Requests/RequeteSalle.php
+Description : ces fichiers traitent les requêtes en effectuant les vérifications nécessaires (autorisations, champs valides).

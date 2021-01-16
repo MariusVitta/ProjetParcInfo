@@ -1276,6 +1276,49 @@
         ]
     },
     {
+        "name": "laravel-lang/lang",
+        "version": "8.0.1",
+        "version_normalized": "8.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Laravel-Lang/lang.git",
+            "reference": "c453dd58830478eca8a8158d7979a24f7920fe47"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Laravel-Lang/lang/zipball/c453dd58830478eca8a8158d7979a24f7920fe47",
+            "reference": "c453dd58830478eca8a8158d7979a24f7920fe47",
+            "shasum": ""
+        },
+        "require": {
+            "ext-json": "*"
+        },
+        "suggest": {
+            "andrey-helldar/laravel-lang-publisher": "Easy installation and update of translation files for your project",
+            "arcanedev/laravel-lang": "Translations manager and checker for Laravel 5",
+            "overtrue/laravel-lang": "Command to add languages in your project"
+        },
+        "time": "2021-01-03T17:08:17+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Laravel-Lang Team"
+            }
+        ],
+        "description": "Languages for Laravel",
+        "keywords": [
+            "lang",
+            "languages",
+            "laravel",
+            "lpm"
+        ]
+    },
+    {
         "name": "laravel/framework",
         "version": "v8.22.1",
         "version_normalized": "8.22.1.0",
