@@ -5,9 +5,9 @@
 	use Illuminate\Database\Eloquent\Factories\HasFactory;
 	use Illuminate\Database\Eloquent\Model;
 
-	class Logiciels extends Model {
+	class Salles extends Model {
 		
 	    use HasFactory;
-	    protected $fillable = ["nom_logiciel", "auteur", "type", "licence", "site"];
+	    protected $fillable = ["numero_salle", "nom_salle", "type_salle", "nom_OS", "type_OS", "version_OS"];
 	}
 ?>
