@@ -5,6 +5,7 @@
 	namespace App\Http\Controllers;
 
 	use App\Http\Requests\RequeteSalle;
+	use App\Models\Salles;
 
 	class ControleurSalles extends Controller {
 
@@ -17,7 +18,17 @@
  		 * Paramètre : résultat de la saisie
  		 */
 	    public function stockerInfos(RequeteSalle $requete) {
-        	return view("salles")->with("reponse", "La salle recherchée est " . $requete->input("salle"));
+
+        	$resultatRequete = Salles::where("nom_salle", $requete->input("salle"))->get();
+			if (sizeof($resultatRequete) > 0)
+        		return view("salles")->with("reponse", "Nom de la salle : " . $resultatRequete[0]["nom_salle"] .
+        												  "</br>Numéro : " . $resultatRequete[0]["numero_salle"] .
+        												  "</br>Type : " . $resultatRequete[0]["type_salle"] .
+        												  "</br>Nom OS : " . $resultatRequete[0]["nom_OS"] .
+        												  "</br>Type OS : " . $resultatRequete[0]["type_OS"] .
+        												  "</br>Version OS : " . $resultatRequete[0]["version_OS"]);
+        	else
+        		return view("salles")->with("reponse", $requete->input("salle") . " n'existe pas !");
     	}
 	}
 

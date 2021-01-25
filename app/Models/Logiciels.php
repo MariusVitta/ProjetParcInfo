@@ -6,7 +6,7 @@
 	use Illuminate\Database\Eloquent\Model;
 
 	class Logiciels extends Model {
-		
+
 	    use HasFactory;
 	    protected $fillable = ["nom_logiciel", "auteur", "type", "licence", "site"];
 	}

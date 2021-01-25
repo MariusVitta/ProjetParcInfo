@@ -19,9 +19,13 @@
  		 */
     	public function stockerInfos(RequeteLogiciel $requete) {
 
-    		$resultatRequete = Logiciels::select("auteur")->where("nom_logiciel", $requete->input("logiciel"))->get();
+    		$resultatRequete = Logiciels::where("nom_logiciel", $requete->input("logiciel"))->get();
 			if (sizeof($resultatRequete) > 0)
-        		return view("logiciels")->with("reponse", "L'auteur de " . $requete->input("logiciel") . " est " . $resultatRequete[0]["auteur"]);
+        		return view("logiciels")->with("reponse", "Nom du logiciel : " . $resultatRequete[0]["nom_logiciel"] .
+        												  "</br>Auteur : " . $resultatRequete[0]["auteur"] .
+        												  "</br>Type : " . $resultatRequete[0]["type_logiciel"] .
+        												  "</br>Licence : " . $resultatRequete[0]["licence"] .
+        												  "</br>Site : " . $resultatRequete[0]["site"]);
         	else
         		return view("logiciels")->with("reponse", $requete->input("logiciel") . " n'existe pas !");
     	}
