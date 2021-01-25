@@ -873,36 +873,6 @@ class Collection implements ArrayAccess, Enumerable
     }
 
     /**
-     * Reduce the collection to a single value.
-     *
-     * @param  callable  $callback
-     * @param  mixed  $initial
-     * @return mixed
-     */
-    public function reduce(callable $callback, $initial = null)
-    {
-        return array_reduce($this->items, $callback, $initial);
-    }
-
-    /**
-     * Reduce an associative collection to a single value.
-     *
-     * @param  callable  $callback
-     * @param  mixed $initial
-     * @return mixed
-     */
-    public function reduceWithKeys(callable $callback, $initial = null)
-    {
-        $result = $initial;
-
-        foreach ($this->items as $key => $value) {
-            $result = $callback($result, $value, $key);
-        }
-
-        return $result;
-    }
-
-    /**
      * Replace the collection items with the given items.
      *
      * @param  mixed  $items
@@ -1198,7 +1168,7 @@ class Collection implements ArrayAccess, Enumerable
                 if (is_callable($prop)) {
                     $result = $prop($a, $b);
                 } else {
-                    $values = [Arr::get($a, $prop), Arr::get($b, $prop)];
+                    $values = [data_get($a, $prop), data_get($b, $prop)];
 
                     if (! $ascending) {
                         $values = array_reverse($values);

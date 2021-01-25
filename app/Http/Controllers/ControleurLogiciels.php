@@ -5,6 +5,7 @@
 	namespace App\Http\Controllers;
 
 	use App\Http\Requests\RequeteLogiciel;
+	use App\Models\Logiciels;
 
 	class ControleurLogiciels extends Controller {
 
@@ -17,7 +18,12 @@
  		 * Paramètre : résultat de la saisie
  		 */
     	public function stockerInfos(RequeteLogiciel $requete) {
-        	return view("logiciels")->with("reponse", "Le logiciel recherché est " . $requete->input("logiciel"));
+
+    		$resultatRequete = Logiciels::select("auteur")->where("nom_logiciel", $requete->input("logiciel"))->get();
+			if (sizeof($resultatRequete) > 0)
+        		return view("logiciels")->with("reponse", "L'auteur de " . $requete->input("logiciel") . " est " . $resultatRequete[0]["auteur"]);
+        	else
+        		return view("logiciels")->with("reponse", $requete->input("logiciel") . " n'existe pas !");
     	}
 	}
 
