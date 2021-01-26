@@ -26,6 +26,6 @@ class SearchController extends Controller{
          
          if(count($user) > 0)
             return view('accueil')->withDetails( $user)->withQuery($q);
-        else return view ('accueil')->withMessage('Aucun resultat trouvé pour la recherche')->withQuery($q);
+        else return view ('accueil')->withMessage('Aucun resultat trouvé pour la recherche:')->withQuery($q);
     }
 }

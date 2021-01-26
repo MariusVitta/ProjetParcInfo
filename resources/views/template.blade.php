@@ -12,7 +12,10 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		 <!-- Fonts -->
-		 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 		<!-- Styles -->
 		<style>
@@ -39,41 +42,30 @@
                 height:50px;
             }
             #site-search {
-                width:70%; 
-                height:50px;
+                width:80%; 
+                height:70px;
             }
         </style>
+		
 		
 	</head>
 
 	<body class="antialiased">
-		<div class="col-sm-3">
-			
-			<form action="{{ url('accueil') }}" method="get" role="search">
-                @csrf
-				<button  class="btn btn-primary btn-lg" >
-                	<span class="glyphicon glyphicon-user">
-                	</span>
-                	<br>ACCUEIL
-            	</button>
-            </form>
-			
-			<form action="{{ url('connexion') }}" method="get" role="search">
-                @csrf
-				<button class="btn btn-primary btn-lg" >
-					<span class="glyphicon glyphicon-user">
-					</span>
-					<br>LOGIN ADMINISTRATEUR
-				</button>
-			</form>
+	
+		<section>
+			<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<img src="{{ URL::to('/photos/newlogoIUT.png') }}" id="logo"  alt="...">
+					</div>
+				</div>
+			</div>
+		</section>
+		<div class="container">
+			<a class="btn btn-primary" href="{{ url('accueil') }}" role="button">accueil</a>
+			<a class="btn btn-primary" href="{{ url('connexion') }}" role="button">Login administrateur</a>	
         </div>
 
-        <div >
-            <div >
-                <img id="logo" src="{{ URL::to('/photos/newlogoIUT.png') }}">    <!-- image -->
-            </div>
-        </div>
-	
 		 @yield('contenu') 
 		 @yield('resultatRecherche')
 	</body>
