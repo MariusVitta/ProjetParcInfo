@@ -14,10 +14,10 @@
 
 	/* Route vers le contrôleur de la page des logiciels */
 	Route::get("logiciels", [ControleurLogiciels::class, "afficherPage"]);
-	Route::post("logiciels", [ControleurLogiciels::class, "stockerInfos"]);
+	Route::post("logiciels", [ControleurLogiciels::class, "afficherSalles"]);
 
 	/* Route vers le contrôleur de la page des salles */
 	Route::get("salles", [ControleurSalles::class, "afficherPage"]);
-	Route::post("salles", [ControleurSalles::class, "stockerInfos"]);
+	Route::post("salles", [ControleurSalles::class, "afficherLogiciels"]);
 
 ?>

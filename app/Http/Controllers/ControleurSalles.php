@@ -17,17 +17,40 @@
 	    /* Récupération des informations provenant de la barre de recherche de salles
  		 * Paramètre : résultat de la saisie
  		 */
-	    public function stockerInfos(RequeteSalle $requete) {
+	    public function afficherLogiciels(RequeteSalle $requete) {
 
-        	$resultatRequete = Salles::where("nom_salle", $requete->input("salle"))->get();
-			if (sizeof($resultatRequete) > 0)
-        		return view("salles")->with("reponse", "Nom de la salle : " . $resultatRequete[0]["nom_salle"] .
-        												  "</br>Numéro : " . $resultatRequete[0]["numero_salle"] .
-        												  "</br>Type : " . $resultatRequete[0]["type_salle"] .
-        												  "</br>Nom OS : " . $resultatRequete[0]["nom_OS"] .
-        												  "</br>Type OS : " . $resultatRequete[0]["type_OS"] .
-        												  "</br>Version OS : " . $resultatRequete[0]["version_OS"]);
-        	else
+	    	/* Requête sur la base de données. Équivalent SQL :
+    		 * SELECT "nom_logiciel", "version_logiciel", "auteur", "type_logiciel", "licence", "site" FROM salles
+    		 * NATURAL JOIN installations NATURAL JOIN logiciels WHERE "nom_salle = <salle saisie>"
+    		*/
+        	$resultatRequete = Salles::select("nom_logiciel", "auteur", "type_logiciel", "licence", "site")
+    								->join("installations", "salles.id_salle", "=", "installations.id_salle")
+    								->join("logiciels", "installations.id_logiciel", "=", "logiciels.id_logiciel")
+    								->where("nom_salle", $requete->input("salle"))->get();
+
+    		/* Initialisation du message à afficher */
+    		$affichage = "Résultats pour " . $requete->input("salle") . " : <br /> <br />";
+
+			if (sizeof($resultatRequete) > 0) {
+
+				/* Ajout de chacun des résultats de la requête dans l'affichage :
+				 * Nom du logiciel : <nom logiciel>
+				 * Auteur : <auteur>
+				 * Type : <type>
+				 * Licence : <licence>
+				 * Site : <site>
+				 * ------------------------------------------------------------------
+				 */
+				for ($i = 0; $i < sizeof($resultatRequete); $i++)
+        			$affichage .= "Nom du logiciel : " . $resultatRequete[$i]["nom_logiciel"] .
+								  "<br />Auteur : " . $resultatRequete[$i]["auteur"] .
+								  "<br />Type : " . $resultatRequete[$i]["type_logiciel"] .
+								  "<br />Licence : " . $resultatRequete[$i]["licence"] .
+								  "<br />Site : " . $resultatRequete[$i]["site"] . "<hr />";
+
+				/* Affichage final */
+        		return view("salles")->with("reponse", $affichage);	
+			} else /* Erreur sur le nom du logiciel */
         		return view("salles")->with("reponse", $requete->input("salle") . " n'existe pas !");
     	}
 	}
