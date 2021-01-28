@@ -1,17 +1,16 @@
-@extends('template')
- 
-@section('titre')
-    Bibliotheque logiciel 
+@extends("template")
+
+@section("titre")
+	accueil
 @endsection
- 
-@section('contenu')
-    <div class="container">
+
+@section("champ_de_saisie")
+	<div class="container">
         <div id="searchbar" >
-                <form  action="{{ url('recherche') }}" method="POST" role="search">
+                <form  method="POST" role="search">
                     @csrf
-                    <label for="site-search"> Barre de recherche:</label>
-                    <input class="form-control mr-sm-2" type="search" id="site-search" name="q" placeholder="Rechercher un logiciel ou une salle" autocomplete="off"> 
-                    <button type="submit" id="boutonSearch">Rechercher</button>
+                    <input class="form-control mr-sm-2" type="text" name="logiciel" id="logiciel" placeholder="Rechercher un logiciel ou une salle" autocomplete="off" />
+                    <input type="submit" value="Rechercher" />
                 </form>
         </div>
         <div>
@@ -20,23 +19,56 @@
             @endif
         </div>
     </div>
+	
 @endsection
 
-@section('resultatRecherche')
-    <div class="container">
+@section("resultatRecherche")
+	<div class="container">
         @if(isset($details))
-            <p> les resultats pour la recherche <b> " {{ $query }} " </b> est :</p>
-        <h2>details de la recherche</h2>
+            <p> Voici la liste des salles pour le logiciel <b> " {{ $query }} " </b> :</p>
+        <h2>Details de la recherche</h2>
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Nom</th>
+                    <th>Nom salle </th>
+					<th>Version logiciel </th>
+					
                 </tr>
             </thead>
             <tbody>
-                @foreach($details as $user)
+                @foreach($details as $salle)
                 <tr>
-                    <td>{{$user->name}}</td>
+                    <td>{{$salle->nom_salle}}</td>
+					<td>{{$salle->version_logiciel}}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        @endif
+    </div>
+
+    <div class="container">
+        @if(isset($salles))
+            <p> Voici la liste des logiciels pour la salle <b> " {{ $query }} " </b> :</p>
+        <h2>Details de la recherche</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nom du logiciel </th>
+					<th>Auteur </th>
+					<th>Type </th>
+					<th>Licence </th>
+					<th> Site </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($salles as $logiciel)
+                <tr>
+                    <td>{{$logiciel->nom_logiciel}}</td>
+					<td>{{$logiciel->auteur}}</td>
+					<td>{{$logiciel->type_logiciel}}</td>
+					<td>{{$logiciel->licence}}</td>
+					<td>{{$logiciel->site}}</td>
                 </tr>
                 @endforeach
             </tbody>

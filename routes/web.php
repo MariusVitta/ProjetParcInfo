@@ -1,31 +1,25 @@
 <?php
-//use SearchController;
-use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-use App\Http\Controllers\SearchController;
-use App\Http\Controllers\ControllerAccueil;
-use App\Http\Controllers\ControllerConnexion;
-use App\Http\Controllers\ControllerLogiciel;
-use App\Http\Controllers\ControllerSalle;
+	/* Ce fichier regroupe l'ensemble des routes permettant d'accéder aux différentes pages du site. */
 
-/* ROUTE GET */
-Route::get('/', [ControllerAccueil::class, 'index'])->name('accueil');
-Route::get('accueil', [ControllerAccueil::class, 'index'])->name('accueil');
-Route::get('connexion', [ControllerConnexion::class, 'index'])->name('connexion');
-Route::get('logiciel', [ControllerLogiciel::class, 'index']);
-Route::get('salle', [ControllerSalle::class, 'index']);
+	use Illuminate\Support\Facades\Route;
 
-/* POST */
-Route::post('accueil', [SearchController::class, 'store']);
-Route::post('recherche', [SearchController::class, 'recherche'])->name('recherche');
+	/* On utilise des contrôleurs pour l'affichage des pages web */
+	use App\Http\Controllers\ControleurAccueil;
+	use App\Http\Controllers\ControleurLogiciels;
+	use App\Http\Controllers\ControleurSalles;
 
+	/* Route vers le contrôleur de la page d'accueil */
+	Route::get("/", [ControleurAccueil::class, "afficherPage"]);
+	Route::get("accueil", [ControleurAccueil::class, "afficherPage"]);
+	Route::post("accueil", [ControleurLogiciels::class, "afficherSalles"]);
+
+	/* Route vers le contrôleur de la page des logiciels */
+	Route::get("logiciels", [ControleurLogiciels::class, "afficherPage"]);
+	Route::post("logiciels", [ControleurLogiciels::class, "afficherSalles"]);
+
+	/* Route vers le contrôleur de la page des salles */
+	Route::get("salles", [ControleurSalles::class, "afficherPage"]);
+	Route::post("salles", [ControleurSalles::class, "afficherLogiciels"]);
+
+?>

@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 	<!-- Page d'accueil du site -->
@@ -63,13 +61,14 @@
 		</section>
 		<div class="container">
 			<a class="btn btn-primary" href="{{ url('accueil') }}" role="button">accueil</a>
-			<a class="btn btn-primary" href="{{ url('connexion') }}" role="button">Login administrateur</a>	
+			<a class="btn btn-primary" href="{{ url('salles') }}" role="button">ajouter salle</a>
+			<a class="btn btn-primary" href="{{ url('logiciels') }}" role="button">ajouter logiciel</a>
+			<a class="btn btn-primary" href="{{ url('logiciels') }}" role="button">ajouter departement</a>
         </div>
 
-		 @yield('contenu') 
-		 @yield('resultatRecherche')
+		@yield("champ_de_saisie")
+		@yield('resultatRecherche')
 	</body>
 
 </html>
         
-      
