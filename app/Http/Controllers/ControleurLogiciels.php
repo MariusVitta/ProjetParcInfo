@@ -36,7 +36,7 @@
         	$resultatRequeteSalle = Salles::select("nom_logiciel", "auteur", "type_logiciel", "licence", "site")
     								->join("installations", "salles.id_salle", "=", "installations.id_salle")
     								->join("logiciels", "installations.id_logiciel", "=", "logiciels.id_logiciel")
-    								->where("nom_salle", $requete->input("logiciel"))->get();
+    								->where("nom_salle", 'LIKE', '%'. $requete->input("logiciel"). '%')->get();
 
     	
 			//$resultatRequete = Logiciels::where("nom_logiciel",'LIKE','%'.$requete->input("logiciel").'%')->get();
