@@ -1,0 +1,109 @@
+
+html,
+body {
+    height: 100%;
+}
+html{
+    overflow-y: auto;
+}
+
+body {
+    font-family: 'Nunito';
+    text-align:center;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+label {
+    display: block;
+    font: 1rem 'Fira Sans', sans-serif;
+    box-align:center;
+}
+input,label {
+    margin: .4rem 0;
+}
+#logo{
+    width:30%;
+    height:25%;
+}
+#page-content {
+    flex: 1 0 auto;
+}
+.btn-primary{
+    color:#fff;
+    background-color:#263a7a;
+    border-color:#263a7a;
+    align-items: center;
+}
+.btn-primary:hover{
+    color:#fff;
+    background-color:#516194;
+    border-color:#263a7a;
+}
+
+a:link {
+    text-decoration:none;
+}
+
+footer{
+    background-color: #f0eeee;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+
+
+}
+
+#sticky-footer {
+    flex-shrink: none;
+}
+
+.titreSite {
+    background-color: #000000;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../photos/iut.jpg);
+    background-position: center;
+    background-size: cover;
+    color: #ffffff;
+    padding: 1em;
+    text-align: center;
+}
+#recherche{
+    background-image: url(https://cdn2.hubspot.net/hubfs/4004166/bioticresearch_website_assets/images/search_icon.png);
+    background-position: left center;
+    background-repeat: no-repeat;
+    padding-left: 6%;
+}
+
+.close-icon {
+	position: relative;
+	padding: 10px;
+}
+.close-icon {
+	border:1px solid transparent;
+	background-color: transparent;
+	display: inline-block;
+	vertical-align: middle;
+    outline: 0;
+    cursor: pointer;
+}
+.close-icon:after {
+	content: "X";
+	display: block;
+	width: 15px;
+	height: 15px;
+	position: absolute;
+	background-color: #FA9595;
+	z-index:1;
+	right: 35px;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	padding: 2px;
+	border-radius: 50%;
+	text-align: center;
+	color: white;
+	font-weight: normal;
+	font-size: 12px;
+	box-shadow: 0 0 2px #E50F0F;
+	cursor: pointer;
+}

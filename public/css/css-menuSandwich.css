@@ -1,0 +1,131 @@
+
+html, body {
+    height: 100%;
+}
+html{
+    overflow-y: auto;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    transition: background-color .5s;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a, .dropdown-btn   {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    background-color: #ffffff;
+    display: block;
+    transition: 0.3s
+}
+
+.bouton:hover,  .bouton:focus{
+    /*color: #f1f1f1; */
+    color: #4b29c4;
+    background-color: #dd3f8e;
+}
+
+.closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px !important;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.lien {
+    display: none;
+    background-color: #dd3f8e;
+    padding-left: 8px;
+  }
+  
+  /* Optional: Style the caret down icon */
+.fa-caret-down {
+    float: right;
+    padding-right: 8px;
+}
+
+.btn-primary{
+    color:#fff;
+    background-color:#263a7a;
+    border-color:#263a7a;
+    align-items: center;
+    /* text-align:center;*/
+}
+#recherche{
+    background-image: url(https://cdn2.hubspot.net/hubfs/4004166/bioticresearch_website_assets/images/search_icon.png);
+    background-position: left center;
+    background-repeat: no-repeat;
+    padding-left: 6%;
+}
+
+@media screen and (max-width: 600px) {
+    .closebtn {
+        position: absolute;
+        top: 1%;
+        left: 80%;
+        font-size: 15px !important;
+        margin-left: 2%;
+    }
+    .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: rgb(255, 255, 255);
+        overflow-x: hidden;
+        transition: 0.5s;
+    }
+    .sidenav a, .dropdown-btn  {
+        width: 100%;
+        height: 5%;
+        padding: 0px 0px 0px 0px;
+        text-decoration: none;
+        font-size: 15px;
+        background-color: #ffffff;
+        display: block;
+        transition: 0.3s
+    }
+    #recherche{
+        background-image: url(https://cdn2.hubspot.net/hubfs/4004166/bioticresearch_website_assets/images/search_icon.png);
+        background-position: left center;
+        background-repeat: no-repeat;
+        padding-left: 12%;
+    }
+    #mySidenav{
+        max-width: 100px;
+    }
+    
+    #main {
+        transition: margin-left .5s;
+        padding: 4px;
+        margin-left: 0% ;
+    }
+    .bouton{
+        width: 100%;
+    }
+}
