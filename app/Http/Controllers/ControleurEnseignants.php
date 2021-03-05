@@ -120,15 +120,15 @@ class ControleurEnseignants extends Controller{
                 foreach($enseignant as $key=>$enseignant){
             
                     $res .= '<label class="flex pull-left justify-end mt-4" value="nomEnseignant" >Nom</label>';
-                    $res .= '<input class="form-control items-center justify-end mt-4 " name="nom_enseignant"  value="'. $enseignant->nom_enseignant. '">';
+                    $res .= '<input class="form-control items-center justify-end mt-4 " name="nom_enseignant" placeholder="Nom de l\'enseignant*"  value="'. $enseignant->nom_enseignant. '" required>';
 
                     $res .= '<label class="flex pull-left justify-end mt-4" value="prenomEnseignant" >Prenom</label>';
-                    $res .= '<input class="form-control items-center justify-end mt-4 " name="prenom_enseignant"  value="'. $enseignant->prenom. '">';
+                    $res .= '<input class="form-control items-center justify-end mt-4 " name="prenom_enseignant" placeholder="prénom de l\'enseignant*" value="'. $enseignant->prenom. '" required>';
                     
                     $res .= '<div class="field">';
-                    $res .= '<label class="flex pull-left justify-end mt-4">Choisir le statut de l\'enseignant </label>';
+                    $res .= '<label class="flex pull-left justify-end mt-4">Choisir le statut de l\'enseignant* </label>';
                     $res .= '<div class="select">';
-                    $res .= '<select class="form-control"  aria-label=".form-select-lg example" name="statut" id="statut" >';
+                    $res .= '<select class="form-control"  aria-label=".form-select-lg example" name="statut" id="statut" required>';
                     foreach($statuts as $key=>$statut){
                         if( $statut === $enseignant->statut ){
                             $res .= '<option value="'.$statut. '"  selected >' .$statut. '</option>';
@@ -142,9 +142,9 @@ class ControleurEnseignants extends Controller{
                     $res .= '</div>';
 
                     $res .= '<div class="field">';
-                    $res .= '<label class="flex pull-left justify-end mt-4">Choisir le département de l\'enseignant</label>';
+                    $res .= '<label class="flex pull-left justify-end mt-4">Choisir le département de l\'enseignant*</label>';
                     $res .= '<div class="select">';
-                    $res .= '<select name="departement_id" id="departement_id" class="form-control" aria-label=".form-select-lg example">';
+                    $res .= '<select name="departement_id" id="departement_id" class="form-control" aria-label=".form-select-lg example" required>';
                     foreach($departements as $key=>$departement){
                         if( $departement->nom === $enseignant->nom_departement ){
                             $res .= '<option value="'. $departement->id. '"  selected >' .$departement->nom. '</option>';

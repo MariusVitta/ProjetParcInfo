@@ -81,28 +81,28 @@ class ControleurDepartement extends Controller
     public function edit(Request $request){
 
         /* l'utilisation de l'ajax fin de compléter les modals à l'aide des données disponibles depuis le controleur */
-        if($request->ajax()){ /* on verifie que l'on soit bien sur une requete ajax afin de ne pas transmettre les données sur un endroit non voulu */
+		if($request->ajax()){ /* on verifie que l'on soit bien sur une requete ajax afin de ne pas transmettre les données sur un endroit non voulu */
+			
+			$res=""; /* variable qui contiendra les données renvoyé sous forme d'un formulaire pré-rempli*/
 
-            $res=""; /* variable qui contiendra les données renvoyé sous forme d'un formulaire pré-rempli*/
-
-
-            /* création du formulaire avec les champ remplis */
-            /*
-             * recuperation du departement avec l'id spécifié en paramètre
-             */
-            $departement= Departement::select("nom")->where('id','LIKE',$request->search)
-                ->get();
+                
+			/* création du formulaire avec les champ remplis */
+			/*
+			 * recuperation du departement avec l'id spécifié en paramètre
+			 */
+			$departement= Departement::select("nom")->where('id','LIKE',$request->search)
+							->get();
 
             if($departement){
                 foreach($departement as $key=>$departement){
                     $res .= '<label class="flex pull-left justify-end mt-4" value="nomDepartement" >Choisir le nom du departement</label>';
-                    $res.= '<input class="form-control items-center justify-end mt-4 " name="nom"  value="'. $departement->nom. '">';
+                    $res.= '<input class="form-control items-center justify-end mt-4 " name="nom" placeholder="Nom du département*" value="'. $departement->nom. '" required>';
                 }
             }
 
             return Response($res);
-        }
-
+		}
+       
     }
 
     /**

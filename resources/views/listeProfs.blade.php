@@ -2,9 +2,9 @@
 @section('content')
     <x-app-layout>
 
-            <x-slot name="header">
+            <x-slot name="header_content">
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    {{ __('Recherche') }}
+                    {{ __('Listes des profs associés à un logiciel') }}
                 </h2>
 
             </x-slot>

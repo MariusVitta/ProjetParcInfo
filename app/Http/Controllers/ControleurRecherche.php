@@ -53,6 +53,10 @@ class ControleurRecherche extends Controller{
 			else return view ('accueil')->withMessage('Aucun resultat trouvé pour la recherche:')->withRecherche($recherche);
 
     	}
+		
+		public function afficherRechercheAdminPage(){
+            return view('recherche_admin');
+        }
 
 		public function afficherRechercheAdmin(Request $request){
 			$request->validate([

@@ -19,7 +19,7 @@
     <!-- importation des icones pour les pages listes salles/logiciels -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- importation du style utilisateur dans le dossier public/css -->
-    <link rel="stylesheet" href="{{ URL::asset('CSS/css.css') }} ">
+    <link rel="stylesheet" href="{{ URL::asset('css/css.css') }} ">
 
 </head>
 

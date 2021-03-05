@@ -45,9 +45,9 @@ class Main extends Component
                     "data" => array_to_object([
                         'href' => [
                             'create_new' => route('user.new'),
-                            'create_new_text' => 'Buat User Baru',
+                            'create_new_text' => 'Ajouter administrateur',
                             'export' => '#',
-                            'export_text' => 'Export'
+                            'export_text' => 'Exporter'
                         ]
                     ])
                 ];
@@ -67,7 +67,7 @@ class Main extends Component
         if (!$data) {
             $this->emit("deleteResult", [
                 "status" => false,
-                "message" => "Gagal menghapus data " . $this->name
+                "message" => "Probleme de suppression de " . $this->name
             ]);
             return;
         }
@@ -75,7 +75,7 @@ class Main extends Component
         $data->delete();
         $this->emit("deleteResult", [
             "status" => true,
-            "message" => "Data " . $this->name . " berhasil dihapus!"
+            "message" => "Données " . $this->name . " bien supprimée !"
         ]);
     }
 

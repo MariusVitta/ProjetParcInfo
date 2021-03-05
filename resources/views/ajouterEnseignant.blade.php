@@ -1,7 +1,7 @@
 
     <x-app-layout>
 
-        <x-slot name="header">
+        <x-slot name="header_content">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Ajouter enseignant') }}
             </h2>
@@ -35,7 +35,7 @@
 
                                 <label >Choisir le département de l'enseignant</label>
                                 <div class="select">
-                                    <select name="departement_id" id="departement_id" class="form-control" aria-label=".form-select-lg example">
+                                    <select name="departement_id" id="departement_id" class="form-control" aria-label=".form-select-lg example" required>
                                         @foreach($departements as $departement)
                                             <option value="{{ $departement->id }}">{{ $departement->nom }}</option>
                                         @endforeach
@@ -44,15 +44,15 @@
 
 
                                 <label value="nom_enseignant"  ></label>
-                                <input class="form-control  items-center justify-end mt-4" type="text" id="nom_enseignant" name="nom_enseignant" :value="old('nom_enseignant')" placeholder="nom de l'enseignant *" required autofocus />
+                                <input class="form-control  items-center justify-end mt-4" type="text" id="nom_enseignant" name="nom_enseignant" :value="old('nom_enseignant')" placeholder="Nom de l'enseignant *" required autofocus />
 
                                 <label value="prenom_enseignant" ></label>
-                                <input class="form-control  items-center justify-end mt-4"  id="prenom_enseignant" name="prenom_enseignant" placeholder="prénom de l'enseignant">{{ old('prenom_enseignant') }}</input>
+                                <input class="form-control  items-center justify-end mt-4"  id="prenom_enseignant" name="prenom_enseignant" placeholder="Prénom de l'enseignant *" required>{{ old('prenom_enseignant') }}</input>
 
                                 <div class="field">
                                     <label > Choisir le statut de l'enseignant </label>
                                     <div class="select">
-                                        <select class="form-control"  aria-label=".form-select-lg example" name="statut" id="statut" >
+                                        <select class="form-control"  aria-label=".form-select-lg example" name="statut" id="statut" required>
                                             @foreach($statuts as $statut)
                                                 <option value="{{ $statut }}">{{ $statut}} </option>
                                             @endforeach

@@ -2,16 +2,16 @@
     <div class="p-8 pt-4 mt-2 bg-white" x-data="window.__controller.dataTableMainController()" x-init="setCallback();">
         <div class="flex pb-4 -ml-3">
             <a href="{{ $data->href->create_new }}" target="_blank" class="-ml- btn btn-primary shadow-none">
-                <span class="fas fa-plus"></span> {{ $data->href->create_new_text }}
+                <span class="fas fa-plus"></span> {{ $data->href->create_new_text }} <!-- Nouveau du bouton d'ajout: App/Http/Livewire/Table -->
             </a>
             <a href="{{ $data->href->export }}" class="ml-2 btn btn-success shadow-none">
-                <span class="fas fa-file-export"></span> {{ $data->href->export_text }}
+                <span class="fas fa-file-export"> </span> {{ $data->href->export_text }}
             </a>
         </div>
 
         <div class="row mb-4">
             <div class="col form-inline">
-                Per Page: &nbsp;
+                Par Page: &nbsp;
                 <select wire:model="perPage" class="form-control">
                     <option>10</option>
                     <option>15</option>
@@ -20,7 +20,7 @@
             </div>
 
             <div class="col">
-                <input wire:model="search" class="form-control" type="text" placeholder="Pencarian...">
+                <input wire:model="search" class="form-control" type="text" placeholder="Rechercher...">
             </div>
         </div>
 

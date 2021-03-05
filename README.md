@@ -1,45 +1,27 @@
-# Laravel 8 + Stisla + Jetstream + Livewire
-we love Stisla Admin Template and Laravel 8 let's make them love each other.
+## Présentation
 
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/nyancodeid/laravel-8-stisla-jetstream/issues)
+Le projet a été réalisé avec Laravel 8, vérifiez également que vous possédez la version de PHP 7.4 ou ultérieure et à utiliser mySQL en tant que système de base de données.
 
-## What inside?
-- Laravel ^8.5 - [laravel.com/docs/8.x](https://laravel.com/docs/8.x)
-- Laravel Jetstream ^1.2 - [jetstream.laravel.com](https://jetstream.laravel.com/)
-- Livewire ^2.0 - [laravel-livewire.com](https://laravel-livewire.com)
-- Stisla Admin Template ^2.3.0 - [getstisla.com](https://getstisla.com/)
+## Installation du serveur
 
-Include simple Data Table with Livewire (CRUD).
+ Avant de lancer le serveur vous devez configurer la base de données à laquelle votre serveur va se connecter, pour cela ouvrez le fichier **.env** qui se trouve dans le dossier *ProjetParcInfo*.
+- modifiez la ligne *DB_DATABASE* avec le nom de la base de données crée au préalable.
+- modifiez les lignes *DB_USERNAME*,*DB_PASSWORD* de telle sorte que le nom utilisateur et le mot de passe correspondent à vos données permettant de vous connectez à votre système de gestion de base de données.
 
-## What next?
-After clone or download this repository, next step is install all dependency required by laravel and laravel-mix.
 
-```shell
-# install composer-dependency
-$ composer install
-# install npm package
-$ npm install
-# build dev 
-$ npm run dev
-```
+## Création des tables utilisateur
 
-Before we start web server make sure we already generate app key, configure `.env` file and do migration.
+Après cela dans un terminal, placez vous dans le dossier *ProjetParcInfo* et exécutez la code `php artisan migrate:install` à la suite de cela une table *migrations* devrait être ajoutée à votre base de données, ensuite lancez la commande `php artisan migrate` cette commande-ci devrait vous créer toutes les tables nécessaires au bon fonctionnement de l'application.
 
-```shell
-# create copy of .env
-$ cp .env.example .env
-# create laravel key
-$ php artisan key:generate
-# laravel migrate
-$ php artisan migrate
-```
 
-## How does it look?
+## Remplissage des tables utilisateurs
 
-<p align="center">
-    <img src="https://telegra.ph/file/49c7571f06872948fb0bc.png" width="80%" height="auto" />
-    <img src="https://telegra.ph/file/613288c34841388c24f34.png" width="80%" height="auto" />
-    <img src="https://telegra.ph/file/7f893b085f7aaca5b91be.png" width="80%" height="auto" />
-    <img src="https://telegra.ph/file/8741e5fc455f02571b4c2.png" width="80%" height="auto" />
-</p>
+Toujours dans le dossier *ProjetParcInfo* et exécutez la code `php artisan db:seed` à la suite de ça  toutes les tables devrait etre remplies.
 
+## Lancement du serveur
+
+Enfin pour lancer votre serveur à partir du dossier *ProjetParcInfo*, tapez la commande `php artisan serve`. Pour accéder au site, ouvrez un navigateur et tapez [http://127.0.0.1:8000/](http://127.0.0.1:8000/) qui est l'URL qui ouvre la page principale du projet
+
+## Notes
+
+Vous pouvez mettre à jour vos *composer* régulièrement avec la commande `composer update` depuis un terminal dans le dossier *ProjetParcInfo* 

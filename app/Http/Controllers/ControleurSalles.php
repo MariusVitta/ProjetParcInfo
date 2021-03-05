@@ -158,21 +158,23 @@ class ControleurSalles extends Controller {
 			 * recuperation du logiciel avec l'id spécifié en paramètre
 			 */
 			$salle = Salle::select("nom_salle","quantitePC", "systemeExploitationPC", "numero",  "type_salle",  "departements.nom as nom_departement")
-                                    ->join("departements", "salles.id", "=", "departements.id")
+                                    ->join("departements", "salles.departement_id", "=", "departements.id")
                                     ->where("salles.id",'LIKE',$request->search)
 							        ->get();
-
             /*
             * récupération de la liste de salles contenant la salle           
             */
             $listeLogicielContenuSalle = Salle::select("logiciels.id as id","nom_logiciel")
                     ->join("installations", "salles.id", "=", "installations.salle_id")
                     ->join("logiciels","installations.logiciel_id", "=", "logiciels.id")
-                    ->where("installations.salle_id","LIKE",$request->search)
+                    ->where("installations.salle_id","=",$request->search)
                     ->get();
+  
+            $toutLogiciels = Salle::select("logiciels.id as id","nom_logiciel")
+                    ->join("installations", "salles.id", "=", "installations.salle_id")
+                    ->join("logiciels","installations.logiciel_id", "=", "logiciels.id")
+                    ->get()->unique();
             
-            //dd($listeLogicielContenuSalle);
-
             $departements = Departement::all();
         
 	    	/* création du formulaire avec les champ remplis */
@@ -180,30 +182,26 @@ class ControleurSalles extends Controller {
                 foreach($salle as $key=>$salle){
                     
                     $res.='<label class="flex pull-left justify-end mt-4" value="nom_salle">Nom salle </label>';
-                    $res.= '<input class="form-control  items-center justify-end mt-4" type="text" name="nom_salle" value="'. $salle->nom_salle. '">';
+                    $res.= '<input class="form-control  items-center justify-end mt-4" type="text" placeholder="Nom de la salle*" name="nom_salle" value="'. $salle->nom_salle. '" required>';
           
                     $res .= '<label class="flex pull-left justify-end mt-4" value="type_salle">Type salle</label>';
-                    $res .= '<input class="form-control  items-center justify-end mt-4"   name="type_salle" value="'.$salle->type_salle. '">';
+                    $res .= '<input class="form-control  items-center justify-end mt-4" placeholder="Type de salle"   name="type_salle" value="'.$salle->type_salle. '">';
 
                     $res .= '<label class="flex pull-left justify-end mt-4" value="quantitePC">Quantité PC</label>';
-                    $res .= '<input class="form-control items-center justify-end mt-4"   name="quantitePC" value="'.$salle->quantitePC. '">';
+                    $res .= '<input class="form-control items-center justify-end mt-4" placeholder="Quantité de PC dans la salle" name="quantitePC" value="'.$salle->quantitePC. '">';
 
                     $res .= '<label class="flex pull-left justify-end mt-4" value="systemeExploitationPC">Systeme d\'exploitation des PC</label>';
-                    $res .= '<input class="form-control items-center justify-end mt-4"   name="systemeExploitationPC"  value="'.$salle->systemeExploitationPC. '">';
+                    $res .= '<input class="form-control items-center justify-end mt-4" placeholder="Systeme d\'exploitation des PC" name="systemeExploitationPC"  value="'.$salle->systemeExploitationPC. '">';
 
                     $res .= '<label class="flex pull-left justify-end mt-4" value="numero" >Numero salle</label>';
-                    $res .= '<input class="form-control  items-center justify-end mt-4"  name="numero" value="'.$salle->numero. '">';
-
-                    // $res .= '<label class="flex pull-left justify-end mt-4" value="departement"> Departement de la salle</label>';
-                    // $res .= '<input class="form-control  items-center justify-end mt-4"  name="departement_id" value="'.$salle->nom_departement. '">';
+                    $res .= '<input class="form-control  items-center justify-end mt-4" placeholder="Numéro de la salle"  name="numero" value="'.$salle->numero. '">';
                 }   
             }
-
-            
+        
             $res .= '<div class="field">';
-            $res .= '<label class="flex pull-left justify-end mt-4">Choisir le département de la salle</label>';
+            $res .= '<label class="flex pull-left justify-end mt-4">Choisir le département de la salle*</label>';
             $res .= '<div class="select">';
-            $res .= '<select name="departement_id" id="departement_id" class="form-control" aria-label=".form-select-lg example">';
+            $res .= '<select name="departement_id" id="departement_id" class="form-control" aria-label=".form-select-lg example" required>';
             foreach($departements as $key=>$departement){
                 if( $departement->nom === $salle->nom_departement ){
                     $res .= '<option value="'. $departement->id. '"  selected >' .$departement->nom. '</option>';
@@ -217,12 +215,26 @@ class ControleurSalles extends Controller {
             $res .= '</div>';  
 
             $res .= '<div class="form-group">';
-            $res .= '<label class=" pull-left justify-end mt-4">Liste de logiciels contenus dans la salle <b>'. $salle->nom_salle.  ' </b></label>';
+            $res .= '<label class=" pull-left justify-end mt-4">Liste de logiciels contenus dans la salle* <b>'. $salle->nom_salle.  ' </b></label>';
             $res .= '<div class="">';
-            $res .=' <select id="" class="select-salles form-control form-control-lg" style="width: 100%" aria-label="form-select-lg " name="logiciels[]" multiple="multiple">';
-            if($listeLogicielContenuSalle){
-                foreach($listeLogicielContenuSalle as $key=>$logiciel){
-                        $res .= '<option value="'. $logiciel->id. '"  selected  >' .$logiciel->nom_logiciel. '</option>';
+            $res .=' <select id="" class="select-salles form-control form-control-lg" style="width: 100%" aria-label="form-select-lg " name="logiciels[]" multiple="multiple" required>';
+
+            $chaineIdLogiciel = "";
+            foreach($listeLogicielContenuSalle as $key=>$logiciel){
+                $chaineIdLogiciel .= $logiciel->id. "-";
+            }
+            $array = explode("-",$chaineIdLogiciel);
+            $array = array_filter($array);
+    
+            if($toutLogiciels){
+                foreach($toutLogiciels as $key=>$logiciel){
+                        if( in_array($logiciel->id,$array) ){
+                            echo $logiciel->id;
+                            $res .= '<option value="'. $logiciel->id. '" selected >' .$logiciel->nom_logiciel. '</option>';
+                        }
+                        else{
+                            $res .= '<option value="'. $logiciel->id. '">' .$logiciel->nom_logiciel. '</option>';
+                        }
                 }
             }
             $res .=' </select>';

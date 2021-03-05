@@ -1,7 +1,7 @@
 
     <x-app-layout>
 
-        <x-slot name="header">
+        <x-slot name="header_content">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Ajouter logiciel') }}
             </h2>
@@ -47,16 +47,16 @@
                                 <input class="form-control  items-center justify-end mt-4" type="text" id="numero" name="numero" :value="old('numero')" placeholder="numero de la salle*" required autofocus />
 
                                 <label value="nom_salle" ></label>
-                                <input class="form-control  items-center justify-end mt-4"  id="nom_salle" name="nom_salle" placeholder=" nom de la salle " required >{{ old('nom_salle') }}</input>
+                                <input class="form-control  items-center justify-end mt-4"  id="nom_salle" name="nom_salle" placeholder=" nom de la salle * " required >{{ old('nom_salle') }}</input>
 
                                 <label value="type_salle" ></label>
-                                <input class="form-control  items-center justify-end mt-4"  id="type_salle" name="type_salle" placeholder=" type  de la salle " required >{{ old('type_salle') }}</input>
+                                <input class="form-control  items-center justify-end mt-4"  id="type_salle" name="type_salle" placeholder=" type  de la salle * " required >{{ old('type_salle') }}</input>
 
                                 <label value="systemeExploitationPC" ></label>
-                                <input class="form-control  items-center justify-end mt-4"  id="systemeExploitationPC" name="systemeExploitationPC" placeholder=" systemeExploitationPC" required >{{ old('systemeExploitationPC') }}</input>
+                                <input class="form-control  items-center justify-end mt-4"  id="systemeExploitationPC" name="systemeExploitationPC" placeholder=" Systeme d'exploitation des PC *" required >{{ old('systemeExploitationPC') }}</input>
 
                                 <label value="quantitePC"></label>
-                                <input class="form-control  items-center justify-end mt-4"  id="quantitePC" name="quantitePC" placeholder=" quantitePC" required >{{ old('quantitePC') }}</input>
+                                <input class="form-control  items-center justify-end mt-4"  id="quantitePC" name="quantitePC" placeholder=" Quantité de PC dans la salle *" required >{{ old('quantitePC') }}</input>
 
                                 <div class="field">
                                     <label class="flex pull-left justify-end mt-4">Choisir le(s) logiciel(s) </label>
@@ -73,16 +73,7 @@
                                         </select>
                                     </div>
                                 </div>
-                            <!-- <div class="field">
-                                    <label class="flex pull-left justify-end mt-4">Choisir le(s) enseignants(s) </label>
-                                    <div class="select">
-                                        <select class="select-enseignants form-control"  aria-label=".form-select-lg example" name="enseignants[]" multiple="multiple">
-                                            @foreach($enseignants as $enseignant)
-                                <option value="{{ $enseignant->id }}">{{ $enseignant->nom }} {{ $enseignant->prenom }} {{ $enseignant->statut }}</option>
-                                            @endforeach
-                                    </select>
-                                </div>
-                            </div>  -->
+                          
                             </div>
                             <div class="items-center justify-end mt-4">
                                 <button type="submit" class="btn btn-secondary">Enregister </button>

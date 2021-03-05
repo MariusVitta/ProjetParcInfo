@@ -1,6 +1,6 @@
  <x-app-layout>
 
-            <x-slot name="header">
+            <x-slot name="header_content">
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                     {{ __('Recherche') }}
                 </h2>
@@ -16,20 +16,41 @@
 
                     <!-- tableau servant à l'affichage de l'autocompletion, le donnée affichée sont filtrées depuis le controleur "App/Http/ControleurAutoCompletion" -->
                     <table class="table table-bordered table-hover">
-                        <tbody class="completion"></tbody>
+                        <tbody id="completion"></tbody>
                     </table>
                     <input type="submit" value="Rechercher" class="btn btn-primary "/>
                 </form>
             <div>
                 <!-- affichage du message d'erreur au cas ou aucun logiciel ou aucune salle n'ait été trouvé pour la recherche -->
-            @if(!empty($message))
-                <!--$message: message d'erreur
-                        $recherche: recherche effectuée
-                    -->
-                    <div class="alert alert-danger"> {{ $message }} {{ $recherche }}</div>
-            @endif
+                @if(!empty($message))
+                    <!--$message: message d'erreur
+                            $recherche: recherche effectuée
+                        -->
+                        <div class="alert alert-danger"> {{ $message }} {{ $recherche }}</div>
+                @endif
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul class="mb-0 mt-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             </div>
-            @extends("errors")
+           
         </div>
 
 
@@ -114,6 +135,101 @@
         @endif
 
     </div>
+
+      <!--
+        scripts utilisés pour l'affichage dynamique de l'autocomplétion
+        le premier script importe jquery pour permettre de rendre la recherche dynamique
+        et le second script est là pour mettre à jour la liste des resultats correspondant à la recherche à chaque entrée ou suppresion dans la barre de recherche
+    -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+    <script type="text/javascript">
+
+        // .on('keyup' : listener sur toutes les modifications faite à la barre de recherche
+        $('#recherche').on('keyup',function(event){
+
+           /**
+            * si la touche pressé par l'utilisateur est la touche flèche du haut ou flèche du bas
+            * on enlève le focus sur la barre de recherche car à chaque modification sur celle-ci
+            * elle rafraichit le resultat, ceci est simplement mit en place pour eviter de perdre la couleur du focus
+            */
+            if(event.keyCode == 38) {
+                $('#recherche').blur(); //.blur(): retire le focus sur la barre de recherche
+            }
+            else if(event.keyCode == 40){
+                $('#recherche').blur();
+            }
+            else{
+                search_value=$(this).val();
+                $.ajax({
+                    type:'GET',
+                    url: '{{ URL::to('autocompletion')}}',
+                    data: {'search': search_value},
+                    success:function(data){
+                        // ajout dans le hmtl de la partie de tableau correspondante au resultat de la recherche
+                        $('tbody#completion').html(data);
+                    },
+                    error: function(err){
+                        console.log('Error'+err);
+                    }
+                });
+                $('#recherche').focus();
+            }
+
+            /**
+             *  fonction qui va permettre lors d'un clique sur l'une des proposition de l'autocompletion de mettre le choix dans la barre de recherche
+             * et de lancer la recherche derrière automatiquement avec le "document.forms["form"].submit();"
+             */
+            $(document).on('click', 'td', function(){
+                $('#recherche').val($(this).text().replace('[Logiciel] ', '').replace('[Salle] ', ''));
+                $('tbody.completion').html('');
+                document.forms["form"].submit();
+            });
+
+        });
+
+        // dès qu'une touche est pressée
+        $(document).on('keydown', function(event) {
+
+             /**
+             * si une des suggestion est surlignée, on va d'abord verifier si l'utilisateur presse les flèches du haut ou du bas
+             * si c'est le cas:
+             *      - c'est la premiere ou la derniere, on retourne 0 et laisse le focus sur la complétion
+             *      - sinon on va déplacer la classe qui permet d'afficher la ligne surlignée d'une cellule vers le haut ou vers le bas dans le tableau "#completion"
+             *
+             */
+            if($('.highlight_row')){
+                var eqItem = $('.highlight_row').index();
+
+
+                if (event.keyCode == 38) {  // si la touche "key up" (flèche du haut) est pressée
+                    if(eqItem==0) {
+                        return 0;
+                    }
+                    $('#completion tr').removeClass('highlight_row');
+                    $('#completion tr:eq('+(eqItem-1)+')').addClass('highlight_row');
+                    $('#recherche').val( $(".highlight_row").text().replace('[Logiciel] ', '').replace('[Salle] ', '')); //on ajoute dynamique la recherche selectionnée avec les flèches dans la barre
+                }
+                if (event.keyCode == 40) { // si la touche "key down" (flèche du bas) est pressée
+                    if(eqItem==$('#completion tr').length-1) {
+                        return 0;
+                    }
+                    $('#completion tr').removeClass('highlight_row');
+                    $('#completion tr:eq('+(eqItem+1)+')').addClass('highlight_row');
+                    $('#recherche').val( $(".highlight_row").text().replace('[Logiciel] ', '').replace('[Salle] ', '')); //on ajoute dynamique la recherche selectionnée avec les flèches dans la barre
+                }
+
+                if (event.keyCode == 8){ //si la touche "back" (effacer) ou n'importe qu'elle touche est pressée on remet le focus sur la barre de recherche
+                    $('#recherche').focus();
+                }
+                else{
+                    $('#recherche').focus();
+                }
+            }
+
+        });
+    </script>
+
 
 
 

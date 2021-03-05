@@ -1,7 +1,7 @@
 
     <x-app-layout>
 
-        <x-slot name="header">
+        <x-slot name="header_content">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Ajouter logiciel') }}
             </h2>
@@ -35,7 +35,7 @@
                             @csrf
                             <div class="mt-4">
                                 <label value="nom_logiciel"></label>
-                                <input class="form-control items-center justify-end mt-4" type="text" id="nom_logiciel" name="nom_logiciel" :value="old('nom_logiciel')" placeholder="nom du logiciel" required autofocus />
+                                <input class="form-control items-center justify-end mt-4" type="text" id="nom_logiciel" name="nom_logiciel" :value="old('nom_logiciel')" placeholder="nom du logiciel *" required autofocus />
 
                                 <label value="editeur"></label>
                                 <input class="form-control  items-center justify-end mt-4"  id="editeur" name="editeur" placeholder=" editeur  du logiciel">{{ old('editeur') }}</input>
@@ -44,7 +44,7 @@
                                 <input class="form-control items-center justify-end mt-4"  id="type_logiciel" name="type_logiciel" placeholder=" type  du logiciel">{{ old('type_logiciel') }}</input>
 
                                 <label value="licence"></label>
-                                <input class="form-control items-center justify-end mt-4"  id="licence" name="licence" placeholder=" licence  du logiciel">{{ old('licence') }}</input>
+                                <input class="form-control items-center justify-end mt-4"  id="licence" name="licence" placeholder=" licence  du logiciel" required>{{ old('licence') }}</input>
 
                                 <label value="siteWeb" ></label>
                                 <input class="form-control  items-center justify-end mt-4"  id="siteWeb" name="siteWeb" placeholder=" siteWeb  du logiciel">{{ old('siteWeb') }}</input>
@@ -53,7 +53,7 @@
                                 <div class="field">
                                     <label class="">Choisir le(s) salle(s) </label>
                                     <div class="select">
-                                        <select class="select-salles form-control items-center justify-end mt-4"  aria-label=".form-select-lg example" name="salles[]" multiple="true">
+                                        <select class="select-salles form-control items-center justify-end mt-4"  aria-label=".form-select-lg example" name="salles[]" multiple="true" required>
                                             @foreach($salles as $salle)
                                                 <option value="{{ $salle->id }}">{{ $salle->nom_salle }}</option>
                                             @endforeach

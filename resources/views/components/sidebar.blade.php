@@ -14,14 +14,14 @@ $links = [
     [
         "href" => [
             [
-                "section_text" => "User",
+                "section_text" => "Administrateur",
                 "section_list" => [
-                    ["href" => "user", "text" => "Data User"],
-                    ["href" => "user.new", "text" => "Buat User"]
+                    ["href" => "user", "text" => "Données Administrateur"],
+                    ["href" => "user.new", "text" => "Ajouter Administrateur"]
                 ]
             ]
         ],
-        "text" => "User",
+        "text" => "Administrateurs",
         "is_multi" => true,
     ],
      [
@@ -44,7 +44,7 @@ $links = [
                 "section_text" => "Enseignant",
                 "section_list" => [
                     ["href" => "enseignant.create", "text" => "Ajouter Engeignant"],
-                    ["href" => "enseignant.lister", "text" => "Afficher Engeignant"]
+                    ["href" => "enseignant.lister", "text" => "Afficher Engeignants"]
                 ]
             ]
         ],
@@ -57,7 +57,7 @@ $links = [
                         "section_text" => "Logiciel",
                         "section_list" => [
                             ["href" => "Logiciel.create", "text" => "Ajouter Logiciel"],
-                            ["href" => "Logiciel.lister", "text" => "Afficher Logiciel"]
+                            ["href" => "Logiciel.lister", "text" => "Afficher Logiciels"]
                         ]
                     ]
                 ],
@@ -70,7 +70,7 @@ $links = [
                         "section_text" => "Salle",
                         "section_list" => [
                             ["href" => "salle.create", "text" => "Ajouter Salle"],
-                            ["href" => "salle.lister", "text" => "Afficher Salle"]
+                            ["href" => "salle.lister", "text" => "Afficher Salles"]
                         ]
                     ]
                 ],
@@ -98,7 +98,7 @@ $navigation_links = array_to_object($links);
             <li class="menu-header">{{ $link->text }}</li>
             @if (!$link->is_multi)
             <li class="{{ Request::routeIs($link->href) ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route("recherche_admin") }}"><i class="fas fa-search"></i><span>Recherche</span></a>
+                <a class="nav-link" href="{{ route($link->href) }}"><i class="fas fa-search"></i><span>Recherche</span></a>
 
             </li>
 

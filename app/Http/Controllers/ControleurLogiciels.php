@@ -177,7 +177,7 @@ class ControleurLogiciels extends Controller {
             $listeSalleContenantLogiciel= Salle::select("salles.id as id","nom_salle")
                     ->join("installations", "salles.id", "=", "installations.salle_id")
                     ->join("logiciels","installations.logiciel_id", "=", "logiciels.id")
-                    ->where("installations.logiciel_id","LIKE",$request->search)
+                    ->where("installations.logiciel_id","=",$request->search)
                     ->get();
             
             $toutesSalles = Salle::all(); 
@@ -187,26 +187,26 @@ class ControleurLogiciels extends Controller {
                 foreach($logiciels as $key=>$logiciel){
 			
                     $res.= '<label class="flex pull-left justify-end mt-4" value="nom_logiciel">Nom logiciel </label>';
-                    $res.= '<input class="form-control items-center justify-end mt-4 "  id="nom_logicielModal" name="nom_logiciel" placeholder="nom du logiciel"  value="'. $logiciel->nom_logiciel. '">';
+                    $res.= '<input class="form-control items-center justify-end mt-4 "  id="nom_logicielModal" name="nom_logiciel" placeholder="Nom du logiciel*"  value="'. $logiciel->nom_logiciel. '" required>';
 
                     $res .= '<label class="flex pull-left justify-end mt-4" value="editeur">Editeur</label>';
-                    $res .= '<input class="form-control  items-center justify-end mt-4"  id="editeurModalinput" name="editeur" placeholder=" editeur  du logiciel" value="'.$logiciel->editeur. '">';
+                    $res .= '<input class="form-control  items-center justify-end mt-4"  id="editeurModalinput" name="editeur" placeholder="Editeur  du logiciel" value="'.$logiciel->editeur. '">';
 
                     $res .= '<label class="flex pull-left justify-end mt-4" value="type_logiciel">Type Logiciel</label>';
-                    $res .= '<input class="form-control items-center justify-end mt-4"  id="type_logicielModal" name="type_logiciel" placeholder=" type  du logiciel" value="'.$logiciel->type_logiciel. '">';
+                    $res .= '<input class="form-control items-center justify-end mt-4"  id="type_logicielModal" name="type_logiciel" placeholder="Type  du logiciel" value="'.$logiciel->type_logiciel. '">';
 
                     $res .= '<label class="flex pull-left justify-end mt-4" value="licence">Licence</label>';
-                    $res .= '<input class="form-control items-center justify-end mt-4"  id="licenceModal" name="licence" placeholder=" licence  du logiciel" value="'.$logiciel->licence. '">';
+                    $res .= '<input class="form-control items-center justify-end mt-4"  id="licenceModal" name="licence" placeholder="Licence  du logiciel" value="'.$logiciel->licence. '">';
 
                     $res .= '<label class="flex pull-left justify-end mt-4" value="siteWeb" >Site web</label>';
-                    $res .= '<input class="form-control  items-center justify-end mt-4"  id="siteWebModal" name="siteWeb" placeholder=" siteWeb  du logiciel"  value="'.$logiciel->siteWeb. '">';
+                    $res .= '<input class="form-control  items-center justify-end mt-4"  id="siteWebModal" name="siteWeb" placeholder="Site web  du logiciel"  value="'.$logiciel->siteWeb. '">';
 
                 }   
             }
             $res .= '<div class="form-group">';
             $res .= '<label class=" pull-left justify-end mt-4">Choisir le(s) salle(s) </label>';
             $res .= '<div class="">';
-            $res .=' <select id="selectSalle" class="select-salles form-control form-control-lg" style="width: 100%" aria-label="form-select-lg " name="salles[]" multiple="multiple">';
+            $res .=' <select id="selectSalle" class="select-salles form-control form-control-lg" style="width: 100%" aria-label="form-select-lg " name="salles[]" multiple="multiple" required>';
             $chaineIdSalleLogiciel = " ";
             foreach($listeSalleContenantLogiciel as $key=>$salle){
                 $chaineIdSalleLogiciel .= $salle->id. " ";

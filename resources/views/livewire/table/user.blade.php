@@ -7,7 +7,7 @@
                     @include('components.sort-icon', ['field' => 'id'])
                 </a></th>
                 <th><a wire:click.prevent="sortBy('name')" role="button" href="#">
-                    Name
+                    Nom
                     @include('components.sort-icon', ['field' => 'name'])
                 </a></th>
                 <th><a wire:click.prevent="sortBy('email')" role="button" href="#">
@@ -15,7 +15,7 @@
                     @include('components.sort-icon', ['field' => 'email'])
                 </a></th>
                 <th><a wire:click.prevent="sortBy('created_at')" role="button" href="#">
-                    Tanggal Dibuat
+                    Date de création
                     @include('components.sort-icon', ['field' => 'created_at'])
                 </a></th>
                 <th>Action</th>
