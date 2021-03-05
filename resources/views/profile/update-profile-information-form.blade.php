@@ -39,12 +39,12 @@
                 </div>
 
                 <x-jet-secondary-button class="mt-2 mr-2" type="button" x-on:click.prevent="$refs.photo.click()">
-                    {{ __('Select A New Photo') }}
+                    {{ __('Selectionner une nouvelle photo') }}
                 </x-jet-secondary-button>
 
                 @if ($this->user->profile_photo_path)
                     <x-jet-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
-                        {{ __('Remove Photo') }}
+                        {{ __('Supprimer la photo') }}
                     </x-jet-secondary-button>
                 @endif
 
@@ -69,7 +69,7 @@
 
     <x-slot name="actions">
         <x-jet-action-message class="mr-3" on="saved">
-            {{ __('Modifié.') }}
+            {{ __('Modifiée.') }}
         </x-jet-action-message>
 
         <x-jet-button wire:loading.attr="disabled" wire:target="photo">
