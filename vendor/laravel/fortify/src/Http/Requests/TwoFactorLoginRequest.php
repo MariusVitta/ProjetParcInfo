@@ -76,6 +76,19 @@ class TwoFactorLoginRequest extends FormRequest
     }
 
     /**
+     * Determine if there is a challenged user in the current session.
+     *
+     * @return bool
+     */
+    public function hasChallengedUser()
+    {
+        $model = app(StatefulGuard::class)->getProvider()->getModel();
+
+        return $this->session()->has('login.id') &&
+            $model::find($this->session()->get('login.id'));
+    }
+
+    /**
      * Get the user that is attempting the two factor challenge.
      *
      * @return mixed
