@@ -23,18 +23,16 @@
                 <!--$message: message d'erreur
                         $recherche: recherche effectuée
                 -->
-                <div class="alert alert-danger"> {{ $message }} {{ $recherche }}</div>
+                <div class="alert alert-danger"> 
+                    {{ $message }} {{ $recherche }} <br/> 
+                    Vous pouvez faire une demande d'installation ou de mise à jour auprès du service informatique
+                    <a href="mailto:iut-laval@univ-lemans.fr" style="color:#263a7a">ici</a>
+                </div>
             @endif
         
             @if (session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
-                </div>
-            @endif
-
-            @if (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
                 </div>
             @endif
 
@@ -144,13 +142,17 @@
             * on enlève le focus sur la barre de recherche car à chaque modification sur celle-ci
             * elle rafraichit le resultat, ceci est simplement mit en place pour eviter de perdre la couleur du focus
             */
-            if(event.keyCode == 38) {
+            if(event.keyCode == 38) { // flèche du haut
                 $('#recherche').blur(); //.blur(): retire le focus sur la barre de recherche
             }
-            else if(event.keyCode == 40){
+            else if(event.keyCode == 40){ //flèche du bas
                 $('#recherche').blur();
             }
-            else{
+            else if(event.keyCode == 13){ // si on appuie sur la touche entrée, on lance la recherche
+                $('tbody.completion').html('');
+                document.forms["form"].submit();
+            }
+            else{ 
                 search_value=$(this).val();
                 $.ajax({
                     type:'GET',
@@ -211,6 +213,9 @@
                 }
 
                 if (event.keyCode == 8){ //si la touche "back" (effacer) ou n'importe qu'elle touche est pressée on remet le focus sur la barre de recherche
+                    $('#recherche').focus();
+                }
+                else{
                     $('#recherche').focus();
                 }  
             }

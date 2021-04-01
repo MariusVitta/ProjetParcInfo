@@ -38,12 +38,6 @@
                     </div>
                 @endif
 
-                @if (session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                @endif
-
                 @if (count($errors) > 0)
                     <div class="alert alert-danger">
                         <ul class="mb-0 mt-0">
@@ -168,6 +162,10 @@
             else if(event.keyCode == 40){
                 $('#recherche').blur();
             }
+            else if(event.keyCode == 13){ // si on appuie sur la touche entrée, on lance la recherche
+                $('tbody.completion').html('');
+                document.forms["form"].submit();
+            }
             else{
                 search_value=$(this).val();
                 $.ajax({
@@ -233,7 +231,7 @@
                 }
                 else{
                     $('#recherche').focus();
-                }
+                }  
             }
 
         });
